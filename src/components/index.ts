@@ -6,8 +6,12 @@ export { default as UserMenu } from "./Navbar/UserMenu";
 export { default as MenuItem } from "./Navbar/MenuItem";
 
 // Modal
-export { default as Modal } from "./Modals/Modal";
+export { default as RegisterModal } from "./Modals/RegisterModal";
+
+// Inputs
+export { default as Input } from "./Inputs/Input";
 
 export { default as Container } from "./Container";
 export { default as Avatar } from "./Avatar";
 export { default as Button } from "./Button";
+export { default as Heading } from "./Heading";
