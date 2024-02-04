@@ -1,12 +1,13 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import { useRegisterModal } from "@/hooks";
+import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useRegisterModal } from "@/hooks";
-import axios from "axios";
+import { Button, Heading, Input } from "..";
 import Modal from "./Modal";
-import { Heading, Input } from "..";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -29,7 +30,12 @@ const RegisterModal = () => {
     setIsLoading(true);
     try {
       const response = await axios.post("/api/register", values);
-    } catch (error) {
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        // toast.error(error.message);
+        // return;
+      }
+      toast.error("Something went wrong! Try again later");
     } finally {
       setIsLoading(false);
     }
@@ -39,7 +45,37 @@ const RegisterModal = () => {
     <div className="flex flex-col gap-4">
       <Heading title="Welcome to Zenbnb" subtitle="Create an account!" />
 
-      <Input id="email" label="Email" disabled={isLoading} register={register} errors={errors} required />
+      <Input id="email" label="Email" type="email" disabled={isLoading} register={register} errors={errors} required />
+
+      <Input id="name" label="Name" disabled={isLoading} register={register} errors={errors} required />
+
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+    </div>
+  );
+
+  const footerContent = (
+    <div className="flex flex-col gap-4 mt-3">
+      <hr />
+      <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => {}} />
+
+      <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => {}} />
+
+      <div className="text-neutral-500 text-center mt-4 font-light">
+        <div className="flex text-center justify-center flex-row items-center gap-4">
+          <p>Already have an account</p>
+          <p className="text-neutral-800 cursor-pointer hover:underline" onClick={registerModal.onClose}>
+            Log in
+          </p>
+        </div>
+      </div>
     </div>
   );
 
@@ -52,6 +88,7 @@ const RegisterModal = () => {
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };
