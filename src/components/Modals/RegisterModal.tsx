@@ -32,8 +32,8 @@ const RegisterModal = () => {
       const response = await axios.post("/api/register", values);
     } catch (error: any) {
       if (error instanceof AxiosError) {
-        // toast.error(error.message);
-        // return;
+        toast.error(error.response?.data.message);
+        return;
       }
       toast.error("Something went wrong! Try again later");
     } finally {
