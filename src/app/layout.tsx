@@ -1,4 +1,4 @@
-import { Navbar, RegisterModal } from "@/components";
+import { LoginModal, Navbar, RegisterModal } from "@/components";
 import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -22,6 +22,7 @@ export default function RootLayout({
         <Navbar />
         <ToasterProvider />
         <RegisterModal />
+        <LoginModal />
         {children}
       </body>
     </html>
