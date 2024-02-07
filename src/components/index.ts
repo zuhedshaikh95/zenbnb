@@ -7,6 +7,7 @@ export { default as MenuItem } from "./Navbar/MenuItem";
 
 // Modal
 export { default as RegisterModal } from "./Modals/RegisterModal";
+export { default as LoginModal } from "./Modals/LoginModal";
 
 // Inputs
 export { default as Input } from "./Inputs/Input";
