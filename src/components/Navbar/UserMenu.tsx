@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
 import { Avatar, MenuItem } from "..";
-import { useRegisterModal } from "@/hooks";
+import { useLoginModal, useRegisterModal } from "@/hooks";
 
 interface Props {}
 
 const UserMenu: React.FC<Props> = ({}) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
 
   const handleToggleShowMenu = () => setShowMenu((prev) => !prev);
 
@@ -44,7 +45,7 @@ const UserMenu: React.FC<Props> = ({}) => {
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-11/12 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             <MenuItem label="Sign up" onClick={registerModal.onOpen} />
-            <MenuItem label="Log in" onClick={() => {}} />
+            <MenuItem label="Log in" onClick={loginModal.onOpen} />
           </div>
         </div>
       )}
