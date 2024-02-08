@@ -1,6 +1,7 @@
 "use client";
-import { useLoginModal, useRegisterModal } from "@/hooks";
-import axios, { AxiosError } from "axios";
+import { useLoginModal } from "@/hooks";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -8,20 +9,17 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { Button, Heading, Input } from "..";
 import Modal from "./Modal";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const LoginModal = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
-  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       email: "",
@@ -37,13 +35,15 @@ const LoginModal = () => {
         redirect: false,
       });
 
-      if (response?.ok) {
-        toast.success("Welcome back!");
-        router.refresh();
+      if (response?.error) {
+        toast.error(response.error);
         return;
       }
 
-      console.log(response?.error);
+      toast.success("Welcome back!");
+      router.refresh();
+      loginModal.onClose();
+      reset();
     } catch (error: any) {
       toast.error(error.message);
     } finally {
