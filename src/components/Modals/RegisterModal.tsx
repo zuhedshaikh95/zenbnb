@@ -1,6 +1,7 @@
 "use client";
 import { useRegisterModal } from "@/hooks";
 import axios, { AxiosError } from "axios";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -62,15 +63,20 @@ const RegisterModal = () => {
   );
 
   const footerContent = (
-    <div className="flex flex-col gap-4 mt-3">
-      <hr />
-      <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => {}} />
+    <div className="flex flex-col gap-4 mt-2">
+      <div className="flex gap-4 items-center">
+        <hr className="w-full" />
+        <p className="text-sm">or</p>
+        <hr className="w-full" />
+      </div>
 
-      <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => {}} />
+      <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => signIn("google")} />
 
-      <div className="text-neutral-500 text-center mt-4 font-light">
-        <div className="flex text-center justify-center flex-row items-center gap-4">
-          <p>Already have an account</p>
+      <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn("github")} />
+
+      <div className="text-neutral-500 text-center font-light">
+        <div className="flex text-center justify-center flex-row items-center gap-2">
+          <p>Already have an account?</p>
           <p className="text-neutral-800 cursor-pointer hover:underline" onClick={registerModal.onClose}>
             Log in
           </p>
