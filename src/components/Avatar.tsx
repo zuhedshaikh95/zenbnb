@@ -4,10 +4,13 @@ import React from "react";
 
 interface Props {
   size: number;
+  src?: string | null;
 }
 
-const Avatar: React.FC<Props> = ({ size }) => {
-  return <Image src="/media/placeholder.jpg" className="rounded-full" height={size} width={size} alt="avatar" />;
+const Avatar: React.FC<Props> = ({ size, src }) => {
+  return (
+    <Image src={src ?? "/media/placeholder.jpg"} className="rounded-full" height={size} width={size} alt="avatar" />
+  );
 };
 
 export default Avatar;
