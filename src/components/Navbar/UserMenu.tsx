@@ -18,9 +18,9 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   const handleToggleShowMenu = () => setShowMenu((prev) => !prev);
 
-  const handleLogout = () => {
+  const handleMenuClickAndClose = (func: Function) => {
+    func();
     setShowMenu(false);
-    signOut();
   };
 
   return (
@@ -45,7 +45,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar size={30} />
+            <Avatar size={35} src={user?.image} />
           </div>
         </div>
       </div>
@@ -63,12 +63,12 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
                 <hr />
 
-                <MenuItem label="Logout" onClick={() => handleLogout()} />
+                <MenuItem label="Logout" onClick={() => handleMenuClickAndClose(signOut)} />
               </>
             ) : (
               <>
-                <MenuItem label="Sign up" onClick={registerModal.onOpen} />
-                <MenuItem label="Log in" onClick={loginModal.onOpen} />
+                <MenuItem label="Sign up" onClick={() => handleMenuClickAndClose(registerModal.onOpen)} />
+                <MenuItem label="Log in" onClick={() => handleMenuClickAndClose(loginModal.onOpen)} />
               </>
             )}
           </div>
