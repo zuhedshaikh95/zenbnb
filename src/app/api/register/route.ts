@@ -30,10 +30,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     if (error.code === "P2002" && error.meta.target.includes("email")) {
-      return NextResponse.json(
-        { message: "Either email or password is incorrect ☹️", success: false },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Email is already taken! Too late ☹️", success: false }, { status: 400 });
     }
     return NextResponse.json(
       { message: error.message, success: false },
