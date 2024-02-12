@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
-import { Container, Logo, Search, UserMenu } from "..";
 import { User } from "@prisma/client";
+import React from "react";
+import { Categories, Container, Logo, Search, UserMenu } from "..";
 
 interface Props {
   user?: User | null;
@@ -19,6 +19,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };
