@@ -17,7 +17,7 @@ const Categories: React.FC<Props> = ({}) => {
 
   return (
     <Container>
-      <div className="pt-4 flex items-center justify-between overflow-x-auto">
+      <div className="pt-4 flex items-center justify-between overflow-x-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent">
         {categories.map((item) => (
           <CategoryBox key={item.label} selected={category === item.label} {...item} />
         ))}
