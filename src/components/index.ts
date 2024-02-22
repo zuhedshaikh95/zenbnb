@@ -9,6 +9,7 @@ export { default as Categories } from "./Navbar/Categories";
 // Modal
 export { default as RegisterModal } from "./Modals/RegisterModal";
 export { default as LoginModal } from "./Modals/LoginModal";
+export { default as RentModal } from "./Modals/RentModal";
 
 // Inputs
 export { default as Input } from "./Inputs/Input";
