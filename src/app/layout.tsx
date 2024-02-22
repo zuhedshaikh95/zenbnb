@@ -1,9 +1,9 @@
-import { LoginModal, Navbar, RegisterModal } from "@/components";
+import getUser from "@/actions/getUser";
+import { LoginModal, Navbar, RegisterModal, RentModal } from "@/components";
 import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import getUser from "@/actions/getUser";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -26,6 +26,7 @@ export default async function RootLayout({
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
+        <RentModal />
         {children}
       </body>
     </html>
