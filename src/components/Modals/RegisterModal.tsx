@@ -1,8 +1,8 @@
 "use client";
-import { useRegisterModal } from "@/hooks";
+import { useLoginModal, useRegisterModal } from "@/hooks";
 import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
@@ -11,8 +11,10 @@ import { Button, Heading, Input } from "..";
 import Modal from "./Modal";
 
 const RegisterModal = () => {
-  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
   const {
     register,
@@ -42,8 +44,13 @@ const RegisterModal = () => {
     }
   };
 
+  const toggle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose();
+  }, [loginModal, registerModal]);
+
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <Heading title="Welcome to Zenbnb" subtitle="Create an account!" />
 
       <Input id="email" label="Email" type="email" disabled={isLoading} register={register} errors={errors} required />
@@ -77,7 +84,7 @@ const RegisterModal = () => {
       <div className="text-neutral-500 text-center font-light">
         <div className="flex text-center justify-center flex-row items-center gap-2">
           <p>Already have an account?</p>
-          <p className="text-neutral-800 cursor-pointer hover:underline" onClick={registerModal.onClose}>
+          <p className="text-neutral-800 cursor-pointer hover:underline" onClick={toggle}>
             Log in
           </p>
         </div>
