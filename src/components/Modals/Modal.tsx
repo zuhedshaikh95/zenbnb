@@ -79,8 +79,6 @@ const Modal: React.FC<Props> = ({
             md:w-4/6
             lg:w-3/6
             xl:w-2/5
-            my-6
-            mx-auto
             h-full
             md:h-auto
         "
