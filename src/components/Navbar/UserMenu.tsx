@@ -1,8 +1,8 @@
 "use client";
-import { useLoginModal, useRegisterModal } from "@/hooks";
+import { useLoginModal, useRegisterModal, useRentModal } from "@/hooks";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
 import { Avatar, MenuItem } from "..";
@@ -15,6 +15,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
 
   const handleToggleShowMenu = () => setShowMenu((prev) => !prev);
 
@@ -23,13 +24,22 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     setShowMenu(false);
   };
 
+  const onRent = useCallback(() => {
+    if (!user) {
+      loginModal.onOpen();
+      return;
+    }
+
+    rentModal.onOpen();
+  }, [user, loginModal]);
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
         <div className="hidden md:flex md:items-center">
           <div
             className="text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-200 transition cursor-pointer"
-            onClick={() => {}}
+            onClick={() => onRent()}
           >
             Zenbnb your home
           </div>
