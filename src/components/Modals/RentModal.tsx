@@ -3,7 +3,7 @@ import { useRentModal } from "@/hooks";
 import React, { useMemo, useState } from "react";
 import Modal from "./Modal";
 import { RentModalStepsE } from "@/types";
-import { CategoryInput, Heading } from "..";
+import { CategoryInput, CountrySelect, Heading } from "..";
 import { categories } from "@/configs/categories.config";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -68,31 +68,48 @@ const RentModal: React.FC<Props> = ({}) => {
     return "Back";
   }, [step]);
 
-  let bodyContent = (
-    <div className="flex flex-col gap-8">
-      <Heading title="Which of these best describes your place?" subtitle="Pick a category" />
+  let bodyContent = useMemo(() => {
+    switch (step) {
+      case RentModalStepsE.CATEGORY:
+        return (
+          <div className="flex flex-col gap-8">
+            <Heading title="Which of these best describes your place?" subtitle="Pick a category" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-auto">
-        {categories.map((item) => (
-          <div key={item.label} className="col-span-1">
-            <CategoryInput
-              onClick={(category) => setCustomValue("category", category)}
-              label={item.label}
-              icon={item.icon}
-              selected={category === item.label}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-auto">
+              {categories.map((item) => (
+                <div key={item.label} className="col-span-1">
+                  <CategoryInput
+                    onClick={(category) => setCustomValue("category", category)}
+                    label={item.label}
+                    icon={item.icon}
+                    selected={category === item.label}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  );
+        );
+
+      case RentModalStepsE.LOCATION:
+        return (
+          <div className="flex flex-col gap-8">
+            <Heading title="Where is your place located?" subtitle="Help guests find you!" />
+
+            <CountrySelect />
+          </div>
+        );
+
+      default:
+        <div></div>;
+    }
+  }, [watch("category"), step]);
 
   return (
     <Modal
       body={bodyContent}
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === RentModalStepsE.CATEGORY ? undefined : onBack}
