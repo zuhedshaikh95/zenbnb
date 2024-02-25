@@ -26,8 +26,6 @@ const CategoryBox: React.FC<Props> = ({ icon: Icon, label, selected }) => {
       category: label,
     };
 
-    console.log(params?.get("category"));
-
     if (params?.get("category") === label) {
       delete updatedQuery.category;
     }
