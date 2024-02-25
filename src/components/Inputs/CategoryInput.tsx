@@ -10,8 +10,6 @@ interface Props {
 }
 
 const CategoryInput: React.FC<Props> = ({ icon: Icon, onClick, label, selected }) => {
-  console.log(selected, label);
-
   return (
     <div
       className={`
