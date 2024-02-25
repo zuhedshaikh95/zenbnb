@@ -39,7 +39,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         <div className="hidden md:flex md:items-center">
           <div
             className="text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-200 transition cursor-pointer"
-            onClick={() => onRent()}
+            onClick={onRent}
           >
             Zenbnb your home
           </div>
@@ -51,7 +51,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
         <div
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
-          onClick={() => handleToggleShowMenu()}
+          onClick={handleToggleShowMenu}
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
@@ -69,7 +69,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
-                <MenuItem label="Zenbnb my home" onClick={() => {}} />
+                <MenuItem label="Zenbnb my home" onClick={rentModal.onOpen} />
 
                 <hr />
 
