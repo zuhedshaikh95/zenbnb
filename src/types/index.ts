@@ -6,3 +6,11 @@ export enum RentModalStepsE {
   DESCRIPTION = 4,
   PRICE = 5,
 }
+
+export interface CountryI {
+  flag: string;
+  label: string;
+  latlng: [number, number];
+  region: string;
+  value: string;
+}
