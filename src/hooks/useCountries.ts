@@ -1,6 +1,7 @@
+import { CountryI } from "@/types";
 import World from "world-countries";
 
-const formattedCountries = World.map((country) => ({
+const formattedCountries: CountryI[] = World.map((country) => ({
   value: country.cca2,
   label: country.name.common,
   flag: country.flag,
