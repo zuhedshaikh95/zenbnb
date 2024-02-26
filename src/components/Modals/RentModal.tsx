@@ -1,11 +1,11 @@
 "use client";
-import { useRentModal } from "@/hooks";
-import React, { useMemo, useState } from "react";
-import Modal from "./Modal";
-import { RentModalStepsE } from "@/types";
-import { CategoryInput, CountrySelect, Heading } from "..";
 import { categories } from "@/configs/categories.config";
+import { useRentModal } from "@/hooks";
+import { CountryI, RentModalStepsE } from "@/types";
+import React, { useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { CategoryInput, CountrySelect, Heading, Map } from "..";
+import Modal from "./Modal";
 
 interface Props {}
 
@@ -35,8 +35,9 @@ const RentModal: React.FC<Props> = ({}) => {
   });
 
   const category = watch("category");
+  const location = watch("location");
 
-  const setCustomValue = (id: string, value: string | number | null) => {
+  const setCustomValue = (id: string, value: string | number | null | CountryI) => {
     setValue(id, value, {
       shouldDirty: true,
       shouldTouch: true,
@@ -92,17 +93,19 @@ const RentModal: React.FC<Props> = ({}) => {
 
       case RentModalStepsE.LOCATION:
         return (
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
             <Heading title="Where is your place located?" subtitle="Help guests find you!" />
 
-            <CountrySelect />
+            <CountrySelect onChange={(value) => setCustomValue("location", value)} value={location} />
+
+            <Map />
           </div>
         );
 
       default:
         <div></div>;
     }
-  }, [watch("category"), step]);
+  }, [category, location, step]);
 
   return (
     <Modal
