@@ -113,7 +113,7 @@ const Modal: React.FC<Props> = ({
                 className="
                   flex
                   items-center
-                  p-4
+                  p-3
                   rounded-t
                   justify-center
                   relative
@@ -126,7 +126,7 @@ const Modal: React.FC<Props> = ({
                     hover:opacity-70
                     transition
                     absolute
-                    left-4
+                    left-3
                   "
                   onClick={() => handleClose()}
                 >
@@ -136,7 +136,7 @@ const Modal: React.FC<Props> = ({
               </div>
 
               {/* BODY */}
-              <div className="relative p-5 flex-auto">{body}</div>
+              <div className="relative p-4 flex-auto">{body}</div>
 
               {/* FOOTER */}
               <div className="flex flex-col gap-2 p-4">
