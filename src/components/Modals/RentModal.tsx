@@ -3,15 +3,20 @@ import { categories } from "@/configs/categories.config";
 import { useRentModal } from "@/hooks";
 import { CountryI, RentModalStepsE } from "@/types";
 import React, { useMemo, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { CategoryInput, Counter, CountrySelect, Heading, ImageUploader } from "..";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { CategoryInput, Counter, CountrySelect, Heading, ImageUploader, Input } from "..";
 import Modal from "./Modal";
 import dynamic from "next/dynamic";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {}
 
 const RentModal: React.FC<Props> = ({}) => {
+  const router = useRouter();
   const rentModal = useRentModal();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [step, setStep] = useState<RentModalStepsE>(RentModalStepsE.CATEGORY);
 
@@ -61,6 +66,31 @@ const RentModal: React.FC<Props> = ({}) => {
     setStep((prev) => prev + 1);
   };
 
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    if (step !== RentModalStepsE.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post("/api/listings", values);
+      toast.success(response.data.message);
+      router.refresh();
+      resetForm();
+      setStep(RentModalStepsE.CATEGORY);
+      rentModal.onClose();
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        toast.error(error.message || error.response?.data.message);
+        return;
+      }
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const actionLabel = useMemo<string>(() => {
     if (step === RentModalStepsE.PRICE) {
       return "Create";
@@ -76,6 +106,8 @@ const RentModal: React.FC<Props> = ({}) => {
 
     return "Back";
   }, [step]);
+
+  console.log("title", watch("title"), "price", watch("price"));
 
   const bodyContent = (() => {
     switch (step) {
@@ -146,6 +178,45 @@ const RentModal: React.FC<Props> = ({}) => {
             <ImageUploader onChange={(url) => setCustomValue("imageSrc", url)} value={imageSrc} />
           </div>
         );
+
+      case RentModalStepsE.DESCRIPTION:
+        return (
+          <div className="flex flex-col gap-4">
+            <Heading title="How would you describe your place?" subtitle="Keep it short and crisp!" />
+
+            <Input id="title" label="Title" disabled={isLoading} register={register} errors={errors} required />
+            <hr />
+            <Input
+              id="description"
+              label="Description"
+              disabled={isLoading}
+              register={register}
+              errors={errors}
+              required
+            />
+          </div>
+        );
+
+      case RentModalStepsE.PRICE:
+        return (
+          <div className="flex flex-col gap-4">
+            <Heading title="Now, set your price" subtitle="How much do you charge per night?" />
+
+            <div>
+              <Input
+                type="number"
+                id="price"
+                label="Price"
+                errors={errors}
+                register={register}
+                disabled={isLoading}
+                formatPrice
+                required
+              />
+            </div>
+          </div>
+        );
+
       default:
         <div></div>;
     }
@@ -156,7 +227,7 @@ const RentModal: React.FC<Props> = ({}) => {
       body={bodyContent}
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === RentModalStepsE.CATEGORY ? undefined : onBack}
