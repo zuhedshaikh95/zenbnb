@@ -23,11 +23,13 @@ const Map: React.FC<Props> = ({ center }) => {
   return (
     <MapContainer
       center={center || [51, -0.09]}
-      zoom={center ? 4 : 2}
+      zoom={center ? 8 : 2}
       scrollWheelZoom={false}
-      className="h-[35vh] rounded-lg"
+      className="h-full md:h-[40vh] rounded-lg"
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+      {center && <Marker position={center} />}
     </MapContainer>
   );
 };
