@@ -8,6 +8,7 @@ interface Props {
   type?: string;
   disabled?: boolean;
   formatPrice?: boolean;
+  className?: string;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -16,12 +17,13 @@ interface Props {
 const Input: React.FC<Props> = ({ errors, id, label, register, disabled, formatPrice, required, type = "text" }) => {
   return (
     <div className="w-full relative">
-      {!!formatPrice && <BiDollar className="text-neutral-500 absolute top-5 left-2" size={24} />}
+      {formatPrice && <BiDollar className="text-neutral-500 absolute top-5 left-2" size={24} />}
       <input
-        className={`peer w-full py-2 pt-4 font-light bg-white border-[1px] rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed 
+        className={`peer w-full p-2 pt-4 font-light bg-white border-[1px] rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed
         ${!!formatPrice ? "pl-9" : "pl-3"}
         ${!!errors[id] ? "border-rose-500" : "border-neutral-300"}
-        ${!!errors[id] ? "focus:border-rose-500" : "focus:border-black"}`}
+        ${!!errors[id] ? "focus:border-rose-500" : "focus:border-black"}
+        `}
         id={id}
         type={type}
         disabled={disabled}
