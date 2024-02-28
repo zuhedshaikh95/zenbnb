@@ -15,6 +15,8 @@ export { default as RentModal } from "./Modals/RentModal";
 export { default as Input } from "./Inputs/Input";
 export { default as CategoryInput } from "./Inputs/CategoryInput";
 export { default as CountrySelect } from "./Inputs/CountrySelect";
+export { default as Counter } from "./Inputs/Counter";
+export { default as ImageUploader } from "./Inputs/ImageUploader";
 
 export { default as Container } from "./Container";
 export { default as Avatar } from "./Avatar";
