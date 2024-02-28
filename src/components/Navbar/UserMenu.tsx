@@ -69,7 +69,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
-                <MenuItem label="Zenbnb my home" onClick={rentModal.onOpen} />
+                <MenuItem label="Zenbnb my home" onClick={() => handleMenuClickAndClose(rentModal.onOpen)} />
 
                 <hr />
 
