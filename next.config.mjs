@@ -12,6 +12,11 @@ const nextConfig = {
         protocol: "https",
         pathname: "/a/**",
       },
+      {
+        hostname: "res.cloudinary.com",
+        protocol: "https",
+        pathname: `/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/**`,
+      },
     ],
   },
 };
