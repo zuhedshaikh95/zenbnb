@@ -29,24 +29,24 @@ const RentModal: React.FC<Props> = ({}) => {
     reset: resetForm,
   } = useForm<FieldValues>({
     defaultValues: {
-      category: "",
-      location: null,
-      guestCount: 1,
-      bathroomCount: 1,
-      roomCount: 1,
-      imageSrc: "",
-      price: 1,
-      title: "",
-      description: "",
+      Category: null,
+      Location: null,
+      Guest_Count: 1,
+      Bathroom_Count: 1,
+      Room_Count: 1,
+      Image: null,
+      Price: 1,
+      Title: null,
+      Description: null,
     },
   });
 
-  const category = watch("category");
-  const location = watch("location");
-  const guestCount = watch("guestCount");
-  const bathroomCount = watch("bathroomCount");
-  const roomCount = watch("roomCount");
-  const imageSrc = watch("imageSrc");
+  const category = watch("Category");
+  const location = watch("Location");
+  const guestCount = watch("Guest_Count");
+  const bathroomCount = watch("Bathroom_Count");
+  const roomCount = watch("Room_Count");
+  const imageSrc = watch("Image");
 
   const Map = useMemo(() => dynamic(() => import("../Map")), [location]);
 
@@ -70,7 +70,7 @@ const RentModal: React.FC<Props> = ({}) => {
     if (step !== RentModalStepsE.PRICE) {
       return onNext();
     }
-
+    values.Location = values.Location?.value;
     setIsLoading(true);
 
     try {
@@ -81,8 +81,9 @@ const RentModal: React.FC<Props> = ({}) => {
       setStep(RentModalStepsE.CATEGORY);
       rentModal.onClose();
     } catch (error: any) {
+      console.log(error);
       if (error instanceof AxiosError) {
-        toast.error(error.message || error.response?.data.message);
+        toast.error(error.response?.data.message);
         return;
       }
       toast.error(error.message);
@@ -107,8 +108,6 @@ const RentModal: React.FC<Props> = ({}) => {
     return "Back";
   }, [step]);
 
-  console.log("title", watch("title"), "price", watch("price"));
-
   const bodyContent = (() => {
     switch (step) {
       case RentModalStepsE.CATEGORY:
@@ -120,7 +119,7 @@ const RentModal: React.FC<Props> = ({}) => {
               {categories.map((item) => (
                 <div key={item.label} className="col-span-1">
                   <CategoryInput
-                    onClick={(category) => setCustomValue("category", category)}
+                    onClick={(category) => setCustomValue("Category", category)}
                     label={item.label}
                     icon={item.icon}
                     selected={category === item.label}
@@ -136,7 +135,7 @@ const RentModal: React.FC<Props> = ({}) => {
           <div className="flex flex-col gap-4 h-full">
             <Heading title="Where is your place located?" subtitle="Help guests find you!" />
 
-            <CountrySelect onChange={(value) => setCustomValue("location", value)} value={location} />
+            <CountrySelect onChange={(value) => setCustomValue("Location", value)} value={location} />
 
             <Map center={location?.latlng} />
           </div>
@@ -150,21 +149,21 @@ const RentModal: React.FC<Props> = ({}) => {
             <Counter
               title="Guests"
               subtitle="How many guests do you allow?"
-              onChange={(value) => setCustomValue("guestCount", value)}
+              onChange={(value) => setCustomValue("Guest_Count", value)}
               value={guestCount}
             />
             <hr />
             <Counter
               title="Rooms"
               subtitle="How many rooms do you have?"
-              onChange={(value) => setCustomValue("roomCount", value)}
+              onChange={(value) => setCustomValue("Room_Count", value)}
               value={roomCount}
             />
             <hr />
             <Counter
               title="Bathrooms"
               subtitle="How many bathrooms do you have?"
-              onChange={(value) => setCustomValue("bathroomCount", value)}
+              onChange={(value) => setCustomValue("Bathroom_Count", value)}
               value={bathroomCount}
             />
           </div>
@@ -175,7 +174,7 @@ const RentModal: React.FC<Props> = ({}) => {
           <div className="flex flex-col gap-4">
             <Heading title="Add a photo of your place" subtitle="Show guests wht your place looks like!" />
 
-            <ImageUploader onChange={(url) => setCustomValue("imageSrc", url)} value={imageSrc} />
+            <ImageUploader onChange={(url) => setCustomValue("Image", url)} value={imageSrc} />
           </div>
         );
 
@@ -184,10 +183,10 @@ const RentModal: React.FC<Props> = ({}) => {
           <div className="flex flex-col gap-4">
             <Heading title="How would you describe your place?" subtitle="Keep it short and crisp!" />
 
-            <Input id="title" label="Title" disabled={isLoading} register={register} errors={errors} required />
+            <Input id="Title" label="Title" disabled={isLoading} register={register} errors={errors} required />
             <hr />
             <Input
-              id="description"
+              id="Description"
               label="Description"
               disabled={isLoading}
               register={register}
@@ -205,7 +204,7 @@ const RentModal: React.FC<Props> = ({}) => {
             <div>
               <Input
                 type="number"
-                id="price"
+                id="Price"
                 label="Price"
                 errors={errors}
                 register={register}
@@ -231,6 +230,7 @@ const RentModal: React.FC<Props> = ({}) => {
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === RentModalStepsE.CATEGORY ? undefined : onBack}
+      disabled={isLoading}
       title="Zenbnb your home!"
     />
   );
