@@ -48,7 +48,7 @@ const RentModal: React.FC<Props> = ({}) => {
   const roomCount = watch("Room_Count");
   const imageSrc = watch("Image");
 
-  const Map = useMemo(() => dynamic(() => import("../Map")), [location]);
+  const Map = useMemo(() => dynamic(() => import("../Map"), { ssr: false }), [location]);
 
   const setCustomValue = (id: string, value: string | number | null | CountryI) => {
     setValue(id, value, {
