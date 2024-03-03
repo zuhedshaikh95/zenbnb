@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
+import { Button, LikeButton } from ".";
 
 interface Props {
   data?: Listing;
@@ -56,7 +57,7 @@ const ListingCard: React.FC<Props> = ({ actionId = "", actionLabel, data, onActi
 
   return (
     <div className="col-span-1 cursor-pointer group" onClick={() => router.push(`/listings/${data?.id}`)}>
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col w-full">
         <div className="aspect-square w-full relative overflow-hidden rounded-xl">
           <Image
             className="object-cover h-full w-full group-hover:scale-110 transition"
@@ -64,7 +65,22 @@ const ListingCard: React.FC<Props> = ({ actionId = "", actionLabel, data, onActi
             alt="listing"
             fill
           />
+          <div className="absolute top-3 right-3">
+            <LikeButton listingId={data?.id!} user={user} />
+          </div>
         </div>
+        <p className="font-semibold text-lg mt-1">
+          {location?.region}, {location?.label}
+        </p>
+
+        <p className="font-light text-neutral-500">{reservationDate || data?.category}</p>
+
+        <div className="flex items-center gap-1">
+          <p className="font-semibold">$ {price}</p>
+          {!reservation && <p className="font-light">night</p>}
+        </div>
+
+        {onAction && actionLabel && <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />}
       </div>
     </div>
   );
