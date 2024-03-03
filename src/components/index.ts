@@ -26,3 +26,4 @@ export { default as CategoryBox } from "./CategoryBox";
 export { default as Map } from "./Map";
 export { default as EmptyState } from "./EmptyState";
 export { default as ListingCard } from "./ListingCard";
+export { default as LikeButton } from "./LikeButton";
