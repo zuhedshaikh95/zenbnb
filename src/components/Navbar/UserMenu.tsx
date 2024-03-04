@@ -2,6 +2,7 @@
 import { useLoginModal, useRegisterModal, useRentModal } from "@/hooks";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const UserMenu: React.FC<Props> = ({ user }) => {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
@@ -23,6 +25,8 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     func();
     setShowMenu(false);
   };
+
+  const navigate = (path: string) => router.push(path);
 
   const onRent = useCallback(() => {
     if (!user) {
@@ -65,7 +69,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
           <div className="flex flex-col cursor-pointer">
             {user ? (
               <>
-                <MenuItem label="My trips" onClick={() => {}} />
+                <MenuItem label="My trips" onClick={() => handleMenuClickAndClose(router.push.bind(null, "/trips"))} />
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
