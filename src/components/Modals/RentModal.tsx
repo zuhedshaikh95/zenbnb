@@ -81,8 +81,7 @@ const RentModal: React.FC<Props> = ({}) => {
       setStep(RentModalStepsE.CATEGORY);
       rentModal.onClose();
     } catch (error: any) {
-      console.log(error);
-      if (error instanceof AxiosError) {
+      if (error instanceof AxiosError && error.response?.data) {
         toast.error(error.response?.data.message);
         return;
       }
