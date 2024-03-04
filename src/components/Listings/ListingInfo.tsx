@@ -1,3 +1,4 @@
+"use client";
 import { useCountries } from "@/hooks";
 import { User } from "@prisma/client";
 import React from "react";
