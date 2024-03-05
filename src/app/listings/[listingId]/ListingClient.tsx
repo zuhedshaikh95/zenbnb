@@ -17,9 +17,7 @@ const initialDateRange = {
 };
 
 interface Props {
-  listing: Listing & {
-    user: User;
-  };
+  listing: Listing;
   reservations: Reservation[];
   user: User | null;
 }
@@ -79,7 +77,7 @@ const ListingClient: React.FC<Props> = ({ listing, reservations = [], user }) =>
       toast.success(response.data.message);
       setDateRange(initialDateRange);
       // Redirect to trips
-      router.refresh();
+      router.push("/trips");
     } catch (error: any) {
       if (error instanceof AxiosError && error.response?.data) {
         toast.error(error.response?.data.message);
@@ -100,11 +98,11 @@ const ListingClient: React.FC<Props> = ({ listing, reservations = [], user }) =>
             imageSrc={listing?.imageSrc}
             locationValue={listing?.locationValue}
             id={listing?.id}
-            user={listing?.user}
+            user={user!}
           />
           <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo
-              user={listing?.user}
+              user={user!}
               category={category}
               description={listing.description}
               roomCount={listing.roomCount}
