@@ -1,3 +1,5 @@
+import { Listing, Reservation } from "@prisma/client";
+
 export enum RentModalStepsE {
   CATEGORY = 0,
   LOCATION = 1,
@@ -13,4 +15,8 @@ export interface CountryI {
   latlng: [number, number];
   region: string;
   value: string;
+}
+
+export interface SafeReservationI extends Reservation {
+  listing: Listing;
 }
