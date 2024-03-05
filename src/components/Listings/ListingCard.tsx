@@ -80,7 +80,9 @@ const ListingCard: React.FC<Props> = ({ actionId = "", actionLabel, data, onActi
           {!reservation && <p className="font-light">night</p>}
         </div>
 
-        {onAction && actionLabel && <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />}
+        <div className="mt-1">
+          {onAction && actionLabel && <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />}
+        </div>
       </div>
     </div>
   );
