@@ -76,7 +76,6 @@ const ListingClient: React.FC<Props> = ({ listing, reservations = [], user }) =>
 
       toast.success(response.data.message);
       setDateRange(initialDateRange);
-      // Redirect to trips
       router.push("/trips");
     } catch (error: any) {
       if (error instanceof AxiosError && error.response?.data) {
