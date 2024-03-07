@@ -70,12 +70,18 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             {user ? (
               <>
                 <MenuItem label="My trips" onClick={() => handleMenuClickAndClose(router.push.bind(null, "/trips"))} />
-                <MenuItem label="My favorites" onClick={() => {}} />
+                <MenuItem
+                  label="My favorites"
+                  onClick={() => handleMenuClickAndClose(router.push.bind(null, "/favorites"))}
+                />
                 <MenuItem
                   label="My reservations"
                   onClick={() => handleMenuClickAndClose(router.push.bind(null, "/reservations"))}
                 />
-                <MenuItem label="My properties" onClick={() => {}} />
+                <MenuItem
+                  label="My properties"
+                  onClick={() => handleMenuClickAndClose(router.push.bind(null, "/properties"))}
+                />
                 <MenuItem label="Zenbnb my home" onClick={() => handleMenuClickAndClose(rentModal.onOpen)} />
 
                 <hr />
