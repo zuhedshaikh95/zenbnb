@@ -6,7 +6,7 @@ import "react-date-range/dist/theme/default.css";
 
 interface Props {
   value: Range;
-  onChange: (valie: RangeKeyDict) => void;
+  onChange: (value: RangeKeyDict) => void;
   disabledDates?: Date[];
 }
 
