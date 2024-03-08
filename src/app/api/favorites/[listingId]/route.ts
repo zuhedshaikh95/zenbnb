@@ -70,7 +70,7 @@ export async function DELETE(request: NextRequest, { params }: { params: ParamsI
       throw new CustomException(400, "Invalid id!");
     }
 
-    const favoriteIds = user.favoriteIds.filter((id) => id !== listingId);
+    const favoriteIds = user.favoriteIds.filter((id: string) => id !== listingId);
 
     await prisma.user.update({
       where: {
