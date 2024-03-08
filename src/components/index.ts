@@ -10,6 +10,7 @@ export { default as Categories } from "./Navbar/Categories";
 export { default as RegisterModal } from "./Modals/RegisterModal";
 export { default as LoginModal } from "./Modals/LoginModal";
 export { default as RentModal } from "./Modals/RentModal";
+export { default as SearchModal } from "./Modals/SearchModal";
 
 // Inputs
 export { default as Input } from "./Inputs/Input";
@@ -34,3 +35,4 @@ export { default as CategoryBox } from "./CategoryBox";
 export { default as Map } from "./Map";
 export { default as EmptyState } from "./EmptyState";
 export { default as LikeButton } from "./LikeButton";
+export { default as Loader } from "./Loader";
