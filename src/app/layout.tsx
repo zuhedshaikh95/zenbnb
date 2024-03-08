@@ -1,5 +1,5 @@
 import getUser from "@/actions/getUser";
-import { LoginModal, Navbar, RegisterModal, RentModal } from "@/components";
+import { LoginModal, Navbar, RegisterModal, RentModal, SearchModal } from "@/components";
 import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -27,6 +27,7 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <RentModal />
+        <SearchModal />
         <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
