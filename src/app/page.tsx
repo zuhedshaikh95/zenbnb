@@ -3,8 +3,14 @@ import getUser from "@/actions/getUser";
 import { Container, EmptyState, ListingCard } from "@/components";
 import { Listing } from "@prisma/client";
 
-export default async function Home() {
-  const listings = await getListings();
+interface HomeProps {
+  searchParams: {
+    userId?: string;
+  };
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const listings = await getListings(searchParams);
   const user = await getUser();
 
   if (listings.length === 0) {
