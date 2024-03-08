@@ -20,3 +20,9 @@ export interface CountryI {
 export interface SafeReservationI extends Reservation {
   listing: Listing;
 }
+
+export enum SearchModalStepsE {
+  LOCATION = 0,
+  DATE = 1,
+  INFO = 2,
+}
