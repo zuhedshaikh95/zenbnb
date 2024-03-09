@@ -1,12 +1,10 @@
 "use client";
 import { useCountries } from "@/hooks";
 import { User } from "@prisma/client";
-import React from "react";
+import dynamic from "next/dynamic";
+import React, { useMemo } from "react";
 import { IconType } from "react-icons";
 import { Avatar, ListingCategory } from "..";
-import dynamic from "next/dynamic";
-
-const Map = dynamic(() => import("../Map"), { ssr: false });
 
 interface Props {
   user: User;
@@ -33,6 +31,8 @@ const ListingInfo: React.FC<Props> = ({
 }) => {
   const { getCountryByValue } = useCountries();
   const coordinates = getCountryByValue(locationValue)?.latlng;
+
+  const Map = useMemo(() => dynamic(() => import("../Map"), { ssr: false }), [coordinates, locationValue]);
 
   return (
     <div className="col-span-4 flex flex-col gap-6">
