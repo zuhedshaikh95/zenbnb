@@ -2,7 +2,7 @@
 import { Container, ListingHead, ListingInfo, ListingReservation } from "@/components";
 import { categories } from "@/configs/categories.config";
 import { useLoginModal } from "@/hooks";
-import { Listing, Reservation, User } from "@prisma/client";
+import { Listing, Reservation, User } from "@/types";
 import axios, { AxiosError } from "axios";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";

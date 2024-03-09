@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User } from "@/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
