@@ -1,6 +1,6 @@
 "use client";
 import { useLoginModal, useRegisterModal, useRentModal } from "@/hooks";
-import { User } from "@/types";
+import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";

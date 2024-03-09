@@ -1,5 +1,5 @@
 import { useFavorite } from "@/hooks";
-import { User } from "@/types";
+import { User } from "@prisma/client";
 import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 

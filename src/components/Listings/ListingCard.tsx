@@ -1,10 +1,10 @@
 "use client";
 import { useCountries } from "@/hooks";
-import { Listing, Reservation, User } from "@/types";
-import { format } from "date-fns";
-import Image from "next/image";
+import { Listing, Reservation, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
+import { format } from "date-fns";
+import Image from "next/image";
 import { Button, LikeButton } from "..";
 
 interface Props {

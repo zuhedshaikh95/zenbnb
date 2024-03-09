@@ -1,5 +1,5 @@
 "use client";
-import { User } from "@/types";
+import { User } from "@prisma/client";
 import React from "react";
 import { Categories, Container, Logo, Search, UserMenu } from "..";
 

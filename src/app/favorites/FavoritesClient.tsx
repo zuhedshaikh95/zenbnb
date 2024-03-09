@@ -1,6 +1,6 @@
 "use client";
 import { Container, Heading, ListingCard } from "@/components";
-import { Listing, User } from "@/types";
+import { Listing, User } from "@prisma/client";
 import React from "react";
 
 interface Props {

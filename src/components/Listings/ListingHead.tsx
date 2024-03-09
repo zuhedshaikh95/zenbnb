@@ -1,6 +1,6 @@
 "use client";
 import { useCountries } from "@/hooks";
-import { User } from "@/types";
+import { User } from "@prisma/client";
 import React from "react";
 import { Heading, LikeButton } from "..";
 import Image from "next/image";

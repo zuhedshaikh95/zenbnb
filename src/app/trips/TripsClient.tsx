@@ -1,6 +1,7 @@
 "use client";
 import { Container, Heading, ListingCard } from "@/components";
-import { SafeReservationI, User } from "@/types";
+import { SafeReservationI } from "@/types";
+import { User } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";

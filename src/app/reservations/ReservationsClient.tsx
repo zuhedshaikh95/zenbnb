@@ -5,7 +5,8 @@ import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Heading, Container, ListingCard } from "@/components";
-import { SafeReservationI, User } from "@/types";
+import { SafeReservationI } from "@/types";
+import { User } from "@prisma/client";
 
 interface Props {
   reservations: SafeReservationI[];
