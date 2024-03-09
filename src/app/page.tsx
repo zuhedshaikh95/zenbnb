@@ -1,7 +1,7 @@
 import getListings from "@/actions/getListings";
 import getUser from "@/actions/getUser";
 import { Container, EmptyState, ListingCard } from "@/components";
-import { Listing } from "@prisma/client";
+import { Listing } from "@/types";
 
 interface HomeProps {
   searchParams: {

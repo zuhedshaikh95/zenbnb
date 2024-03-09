@@ -21,12 +21,9 @@ const SearchModal: React.FC<Props> = ({}) => {
   const [dateRange, setDateRange] = useState<Range>({ startDate: new Date(), endDate: new Date(), key: "selection" });
 
   const {
-    register,
-    handleSubmit,
     watch,
     setValue,
     formState: { errors },
-    reset: resetForm,
   } = useForm<FieldValues>({
     defaultValues: {
       locationValue: null,
@@ -114,7 +111,6 @@ const SearchModal: React.FC<Props> = ({}) => {
     searchModal.onClose();
     setDateRange({ startDate: new Date(), endDate: new Date(), key: "selection" });
     router.push(url);
-    resetForm();
   }, [step, searchModal, location, router, guestCount, roomCount, bathroomCount, dateRange, onNext, params]);
 
   const bodyContent = (() => {
