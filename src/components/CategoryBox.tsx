@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { useCallback, Suspense } from "react";
 import { IconType } from "react-icons";
 import qs from "query-string";
 
@@ -42,8 +42,9 @@ const CategoryBox: React.FC<Props> = ({ icon: Icon, label, selected }) => {
   }, [label, params, router]);
 
   return (
-    <div
-      className={`
+    <Suspense>
+      <div
+        className={`
         flex
         flex-col
         items-center
@@ -57,11 +58,12 @@ const CategoryBox: React.FC<Props> = ({ icon: Icon, label, selected }) => {
         ${selected ? "border-b-neutral-800" : "border-transparent"}
         ${selected ? "text-neutral-800" : "text-neutral-500"}
       `}
-      onClick={() => handleClick()}
-    >
-      <Icon size={26} />
-      <p className="font-medium text-sm">{label}</p>
-    </div>
+        onClick={() => handleClick()}
+      >
+        <Icon size={26} />
+        <p className="font-medium text-sm">{label}</p>
+      </div>
+    </Suspense>
   );
 };
 
