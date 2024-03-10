@@ -2,6 +2,7 @@ import getListings from "@/actions/getListings";
 import getUser from "@/actions/getUser";
 import { Container, EmptyState, ListingCard } from "@/components";
 import { Listing } from "@prisma/client";
+import { Suspense } from "react";
 
 interface HomeProps {
   searchParams: {

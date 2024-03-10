@@ -1,9 +1,9 @@
 "use client";
-import React, { Suspense, useMemo } from "react";
-import { BiSearch } from "react-icons/bi";
 import { useCountries, useSearchModal } from "@/hooks";
-import { useSearchParams } from "next/navigation";
 import { differenceInDays } from "date-fns";
+import { useSearchParams } from "next/navigation";
+import React, { useMemo } from "react";
+import { BiSearch } from "react-icons/bi";
 
 interface Props {}
 
@@ -50,23 +50,21 @@ const Search: React.FC<Props> = ({}) => {
   }, [guestCount]);
 
   return (
-    <Suspense>
-      <div
-        className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
-        onClick={searchModal.onOpen}
-      >
-        <div className="flex items-center justify-between text-sm">
-          <div className="px-6 font-semibold">{locationLabel}</div>
-          <div className="hidden sm:block px-6 font-semibold border-x-[1px] flex-1 text-center">{durationLabel}</div>
-          <div className="px-6 text-gray-600 flex items-center gap-3">
-            <div className="hidden sm:block">{guestLabel}</div>
-            <div className="p-2 bg-rose-500 rounded-full text-white">
-              <BiSearch />
-            </div>
+    <div
+      className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+      onClick={searchModal.onOpen}
+    >
+      <div className="flex items-center justify-between text-sm">
+        <div className="px-6 font-semibold">{locationLabel}</div>
+        <div className="hidden sm:block px-6 font-semibold border-x-[1px] flex-1 text-center">{durationLabel}</div>
+        <div className="px-6 text-gray-600 flex items-center gap-3">
+          <div className="hidden sm:block">{guestLabel}</div>
+          <div className="p-2 bg-rose-500 rounded-full text-white">
+            <BiSearch />
           </div>
         </div>
       </div>
-    </Suspense>
+    </div>
   );
 };
 
