@@ -1,7 +1,7 @@
 import { EmptyState } from "@/components";
 import getUser from "@/actions/getUser";
 import { getReservations } from "@/actions";
-import TripsClient from "./TripsClient";
+import TripsClient from "../../components/TripsClient";
 
 export default async function Trips() {
   const user = await getUser();

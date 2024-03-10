@@ -1,7 +1,7 @@
 import { EmptyState } from "@/components";
 import getUser from "@/actions/getUser";
 import getListings from "@/actions/getListings";
-import PropertiesClient from "./PropertiesClient";
+import PropertiesClient from "../../components/PropertiesClient";
 
 export default async function Properties() {
   const user = await getUser();

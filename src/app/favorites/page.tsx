@@ -1,7 +1,7 @@
 import { EmptyState } from "@/components";
 import getUser from "@/actions/getUser";
 import getFavoriteListings from "@/actions/getFavoriteListings";
-import FavoritesClient from "./FavoritesClient";
+import FavoritesClient from "../../components/FavoritesClient";
 
 export default async function Favorites() {
   const user = await getUser();

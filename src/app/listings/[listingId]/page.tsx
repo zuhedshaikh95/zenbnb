@@ -1,6 +1,6 @@
 import getListingById from "@/actions/getListingById";
 import { EmptyState } from "@/components";
-import ListingClient from "./ListingClient";
+import ListingClient from "../../../components/ListingClient";
 import { getReservations } from "@/actions";
 
 interface ParamsI {

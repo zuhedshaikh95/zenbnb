@@ -1,7 +1,7 @@
 import { EmptyState } from "@/components";
 import getUser from "@/actions/getUser";
 import { getReservations } from "@/actions";
-import ReservationsClient from "./ReservationsClient";
+import ReservationsClient from "../../components/ReservationsClient";
 
 export default async function Reservations() {
   const user = await getUser();
