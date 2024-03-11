@@ -25,7 +25,7 @@ const Map: React.FC<Props> = ({ center }) => {
       center={center || [51, -0.09]}
       zoom={center ? 4 : 2}
       scrollWheelZoom={false}
-      className="h-full min-h-[40vh] rounded-lg"
+      className="h-full rounded-lg"
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
