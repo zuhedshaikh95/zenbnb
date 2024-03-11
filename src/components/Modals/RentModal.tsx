@@ -136,7 +136,9 @@ const RentModal: React.FC<Props> = ({}) => {
 
             <CountrySelect onChange={(value) => setCustomValue("Location", value)} value={location} />
 
-            <Map center={location?.latlng} />
+            <div className="h-full md:h-[40vh]">
+              <Map center={location?.latlng} />
+            </div>
           </div>
         );
 
