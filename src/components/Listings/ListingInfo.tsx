@@ -61,7 +61,9 @@ const ListingInfo: React.FC<Props> = ({
 
       <hr />
 
-      <Map center={coordinates} />
+      <div className="h-[40vh]">
+        <Map center={coordinates} />
+      </div>
     </div>
   );
 };
